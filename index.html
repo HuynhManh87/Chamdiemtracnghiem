@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>OMR Mobile v3.62 - Thông tin bài kiểm tra hoàn chỉnh</title>
+<title>OMR Mobile v3.63 - Thông tin bài kiểm tra hoàn chỉnh</title>
 <style>
 :root{--bg:#f4f7fb;--card:#fff;--ink:#172033;--muted:#6b7280;--line:#d8deea;--brand:#1769e0;--brand2:#0b4fb3;--good:#128a4b;--bad:#c0392b;--warn:#a76500;--soft:#eef5ff}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
@@ -11,7 +11,27 @@ header{position:sticky;top:0;z-index:30;background:#fff;border-bottom:1px solid 
 .wrap{max-width:1220px;margin:auto;padding:16px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.tabs button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 14px;font-weight:800;cursor:pointer}.tabs button.active{background:var(--brand);color:#fff;border-color:var(--brand)}
 .panel{display:none}.panel.active{display:block}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.span5{grid-column:span 5}.span7{grid-column:span 7}.span12{grid-column:span 12}.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 4px 16px rgba(21,33,57,.05)}
 h2{font-size:19px}.sectionTitle{margin:16px 0 8px;font-size:15px;color:var(--brand2)}label{display:block;font-size:13px;font-weight:800;margin:10px 0 6px}input,select,textarea{width:100%;padding:10px 11px;border:1px solid var(--line);border-radius:9px;background:#fff;font:inherit}.row{display:flex;gap:10px;align-items:center}.row>*{flex:1}.btn{border:0;border-radius:10px;padding:10px 14px;font-weight:800;cursor:pointer}.btn.primary{background:var(--brand);color:#fff}.btn.secondary{background:#eaf2ff;color:#0b4fb3}.btn.danger{background:#fff0ef;color:#a22}.btn.good{background:#e9f8ef;color:#08733c}.help{font-size:12px;color:var(--muted);line-height:1.5}.badge{display:inline-block;padding:4px 8px;border-radius:999px;background:#edf2f7;font-size:12px;font-weight:800}.notice{padding:10px 12px;background:#fff8e8;border:1px solid #f2d28c;border-radius:10px;font-size:13px;line-height:1.5}.step{padding:8px 10px;border-left:4px solid var(--brand);background:var(--soft);border-radius:8px;font-size:13px;margin:8px 0}.status{padding:9px 11px;border-radius:9px;font-size:13px;font-weight:700;background:#f3f4f6}.status.ok{background:#e9f8ef;color:#08733c}.status.err{background:#fff0ef;color:#a22}.status.warn{background:#fff8e8;color:#8a5600}
-.template-item{border:1px solid var(--line);border-radius:12px;padding:12px;margin:8px 0;display:flex;justify-content:space-between;gap:10px;align-items:center}.template-item h3{margin:0 0 4px;font-size:15px}.keySection{border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:12px}.keySection h3{margin:0 0 10px;font-size:16px}.answer-grid{display:grid;grid-template-columns:repeat(8,minmax(72px,1fr));gap:8px}.answer-cell{border:1px solid var(--line);border-radius:9px;padding:7px;text-align:center}.answer-cell b{font-size:12px;display:block;margin-bottom:4px}.answer-cell select,.answer-cell input{padding:6px}.tfKey{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}.tfKey select{padding:5px;font-size:12px}.keyTransfer{margin-top:10px;padding:10px 12px;border:1px dashed #b7c4d8;border-radius:10px;background:#f8fafc;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}.keyTransfer .help{margin:0;flex:1 1 360px}.keyTransferActions{display:flex;gap:8px;flex-wrap:wrap}.keyTransferActions .btn{width:auto;min-width:150px}
+.template-item{border:1px solid var(--line);border-radius:12px;padding:12px;margin:8px 0;display:flex;justify-content:space-between;gap:10px;align-items:center}.template-item h3{margin:0 0 4px;font-size:15px}.keySection{border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:12px}.keySection h3{margin:0 0 10px;font-size:16px}.answer-grid{display:grid;grid-template-columns:repeat(8,minmax(72px,1fr));gap:8px}.answer-cell{border:1px solid var(--line);border-radius:9px;padding:7px;text-align:center}.answer-cell b{font-size:12px;display:block;margin-bottom:4px}.answer-cell select,.answer-cell input{padding:6px}.tfKey{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}.tfKey select{padding:5px;font-size:12px}
+.sharedKeyBox{margin-top:14px;border:1px solid #c9dcfb;border-radius:12px;padding:13px;background:#f7fbff}
+.sharedKeyBox h3,.sharedLibraryBox h3{margin:0 0 7px}
+.sharedMetaGrid{display:grid;grid-template-columns:120px 1fr 1fr;gap:10px;align-items:end}
+.sharedKeyActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.sharedKeyActions .btn{width:auto}
+.sharedLibraryBox{margin-top:14px;border:1px solid #d8e0eb;border-radius:12px;padding:13px;background:#fff}
+.sharedLibraryToolbar{display:grid;grid-template-columns:130px 1fr 1fr auto;gap:9px;align-items:end}
+.sharedLibraryList{display:grid;gap:9px;margin-top:10px}
+.sharedPackageCard{border:1px solid var(--line);border-radius:11px;padding:11px;background:#fbfdff;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
+.sharedPackageCard h4{margin:0 0 4px;font-size:14px}.sharedPackageMeta{font-size:11px;color:var(--muted);line-height:1.45}
+.sharedPackageActions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.sharedPackageActions .btn{width:auto;padding:7px 9px;font-size:11px}
+.sharedPackageBadge{display:inline-block;padding:2px 7px;border-radius:999px;background:#e9f8ef;color:#08733c;font-size:10px;font-weight:900;margin-right:5px}
+.sharedPackageOwner{display:inline-block;padding:2px 7px;border-radius:999px;background:#f3f4f6;color:#555;font-size:10px;font-weight:800}
+@media(max-width:850px){
+  .sharedMetaGrid,.sharedLibraryToolbar{grid-template-columns:1fr}
+  .sharedPackageCard{grid-template-columns:1fr}
+  .sharedPackageActions{justify-content:flex-start}
+}
+
+.keyTransfer{margin-top:10px;padding:10px 12px;border:1px dashed #b7c4d8;border-radius:10px;background:#f8fafc;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}.keyTransfer .help{margin:0;flex:1 1 360px}.keyTransferActions{display:flex;gap:8px;flex-wrap:wrap}.keyTransferActions .btn{width:auto;min-width:150px}
 #sheetViewport{overflow:auto;background:#e9edf4;border-radius:12px;padding:12px}.sheet{position:relative;width:794px;height:1123px;background:#fff;margin:auto;color:#111;box-shadow:0 5px 24px rgba(17,24,39,.14);transform-origin:top left;font-family:"Times New Roman",Arial,sans-serif}.sheet .marker{position:absolute;width:26px;height:26px;display:block;overflow:visible;background:none!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;forced-color-adjust:none}.sheet .marker rect{fill:#000!important;stroke:#000!important}.sheet .m1{left:18px;top:18px}.sheet .m2{right:18px;top:18px}.sheet .m3{right:18px;bottom:18px}.sheet .m4{left:18px;bottom:18px}.sheet .examHeading{position:absolute;left:80px;right:80px;top:15px;text-align:center;font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:.2px}.sheet .examSubHeading{position:absolute;left:80px;right:80px;top:34px;text-align:center;font-size:10.5px;font-weight:700}.sheet .title{position:absolute;left:60px;right:60px;top:54px;text-align:center;font-weight:900;font-size:21px;letter-spacing:.25px}.sheet .meta{display:none}.infoBox{position:absolute;left:55px;right:55px;top:96px;height:118px;border:1.4px solid #111;padding:8px 10px;font-size:11px;line-height:1.45;border-radius:2px}.cutStub{position:absolute;left:55px;right:55px;top:96px;height:138px;border:1.4px solid #111;padding:8px 10px;font-size:11px;line-height:1.45;border-radius:2px}.schoolRow{font-weight:900;font-size:11.5px;margin-bottom:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-transform:uppercase;letter-spacing:.1px}.schoolRow .schoolValue{font-weight:700}.infoRow{display:flex;align-items:center;gap:5px;white-space:nowrap;margin-bottom:7px}.infoFill{display:inline-block;border-bottom:1px dotted #222;height:14px;min-width:210px}.infoFill.name{min-width:240px}.infoFill.cls{min-width:56px}.infoFill.code{min-width:66px}.infoFill.room{min-width:80px}.infoRow.freqName .infoFill.name{flex:0 0 320px;min-width:320px;width:320px}.infoRow.freqClass .infoFill.cls{min-width:150px;width:150px}.infoRow.freqClass .infoFill.code{min-width:150px;width:150px}.infoRow.freqCode{margin-bottom:0}.sigInline{display:flex;justify-content:space-between;gap:18px;margin-top:6px;font-size:10px}.sigLine{display:flex;align-items:center;gap:5px;flex:1}.sigFill{display:inline-block;border-bottom:1px dotted #222;height:14px;min-width:110px;flex:1}.phachRow{display:flex;align-items:center;gap:7px;white-space:nowrap}.phachLabel{display:inline-block}.phachLabel.phach{width:58px}.phachLabel.stt{width:64px}.phachLabel.made{width:46px}.dotsField{display:inline-block;border-bottom:1px dotted #222;height:14px;min-width:120px;width:120px}.dotsField.short{min-width:120px;width:120px}.writeSquares{display:inline-flex;gap:4px;vertical-align:middle}.writeSquare{display:inline-block;width:20px;height:20px;border:1.4px solid #111;background:#fff}.serialSquares{display:inline-flex;gap:4px;vertical-align:middle}.serialSquare{display:inline-block;width:22px;height:22px;border:1.4px solid #111;background:#fff}.phachSpacer{display:inline-block;width:120px}.cutLine{position:absolute;left:55px;right:55px;top:248px;border-top:2px dashed #777;text-align:center;font-size:10px;color:#555}.cutLine span{position:relative;top:-8px;background:#fff;padding:0 9px}.anonBox{position:absolute;left:55px;right:55px;top:262px;height:34px;border:1.3px solid #111;padding:6px 9px;font-size:10px}.anonBox .phachRow{gap:7px;align-items:center}.anonBox .serialSquare{width:22px;height:22px}.anonBox .dotsField{min-width:120px;width:120px}.reviewStack{position:absolute;left:539px;top:var(--review-top);width:200px;height:187px;display:flex;flex-direction:column}.scorePanel{width:200px;flex:0 0 auto}.scoreTable{width:100%;height:100%;border-collapse:collapse;table-layout:fixed;font-size:9px;text-align:center;background:#fff}.scoreTable th,.scoreTable td{border:1px solid #111;padding:1px 2px}.scoreTable th{font-weight:900;background:#f3f4f6}.scoreTable.objective .scoreTitleRow{height:26%}.scoreTable.objective .scoreWriteRow{height:74%}.scoreTable.mixed .scoreTitleRow{height:18%}.scoreTable.mixed .scoreLabelRow{height:22%}.scoreTable.mixed .scoreWriteRow{height:60%}.scoreTable.mixed .scoreLabelRow th{font-size:7.5px;line-height:1.05}.scoreTable.mixed .scoreWriteRow td{font-size:16px;vertical-align:middle;background:#fff}.scoreWriteRow td{font-size:15px;vertical-align:middle}.signaturePanel{display:flex;flex-direction:column;width:200px;flex:1 1 auto}.sigBox{border:1px solid #111;text-align:center;padding:6px 4px 0;font-size:9px;font-weight:900;background:#fff;display:flex;align-items:flex-start;justify-content:center;box-sizing:border-box;overflow:hidden}.signaturePanel.n1 .sigBox,.signaturePanel.n2 .sigBox,.signaturePanel.n3 .sigBox{width:200px}
 .guideBox{position:absolute;left:55px;top:var(--guide-top);width:240px;box-sizing:border-box;height:187px;border:1.2px solid #333;border-radius:2px;padding:8px 9px;font-size:10.4px;line-height:1.34;display:flex;flex-direction:column;overflow:hidden}.guideBox .guideTitle{text-align:center;font-size:11px;font-weight:900;margin-bottom:5px;border-bottom:1px solid #aaa;padding-bottom:3px;flex:0 0 auto}.guideBox ol{margin:0 0 0 16px;padding:0;flex:1;display:flex;flex-direction:column;justify-content:space-evenly;min-height:0}.guideBox li{margin:0}.idBlock{position:absolute;box-sizing:border-box;border:1.2px solid #333;border-radius:2px;padding:6px;background:#fff;overflow:hidden;display:flex;flex-direction:column}.idTitle{text-align:center;font-size:10.5px;font-weight:900;height:18px;line-height:18px;border-bottom:1px solid #aaa;margin-bottom:4px;flex:0 0 18px}.idWrite{display:flex;justify-content:center;height:24px;align-items:center;margin-bottom:6px;padding:0 8px;box-sizing:border-box;flex:0 0 24px}.idWriteCols{display:flex;width:68px;justify-content:flex-start;gap:4px;flex:0 0 68px}.idWriteCell{position:relative;width:20px;flex:0 0 20px;height:20px}.idWriteBox{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:20px;height:20px;border:1.4px solid #111;background:#fff}.idGridFrame{width:92px;box-sizing:border-box;overflow:hidden;border:1.25px solid #8e95a3;border-radius:2px;padding:6px 6px;background:#fff;flex:1 1 auto;min-height:0;align-self:center}.idCols{display:flex;width:68px;height:100%;margin:0 auto;justify-content:flex-start;gap:4px}.idCol{width:20px;flex:0 0 20px;text-align:center;padding:0;display:grid;grid-template-rows:repeat(10,1fr);align-items:stretch;justify-items:center;overflow:visible}.idCol+.idCol{border-left:none}.idPos{display:none}.idRow{position:relative;width:20px;min-height:0;font-size:7.1px;line-height:1;justify-self:center;overflow:visible}.idRow>span:first-child{position:absolute;left:-2px;top:50%;transform:translateY(-50%);width:5px;text-align:right}.idBubble{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:8px;height:8px;border:1px solid #111;border-radius:50%;display:inline-block}
 .sheetSecTitle{position:absolute;left:55px;right:55px;font-size:11px;font-weight:900;border-bottom:1.2px solid #111;padding-bottom:3px;letter-spacing:.05px}
@@ -166,7 +186,7 @@ h2{font-size:19px}.sectionTitle{margin:16px 0 8px;font-size:15px;color:var(--bra
 </head>
 <body>
 <div id="appShell">
-<header><div><h1>OMR Mobile v3.62</h1><small>Tự nhận 4 marker • Tự đọc mã đề • Dữ liệu cá nhân hóa theo giáo viên</small></div>
+<header><div><h1>OMR Mobile v3.63</h1><small>Tự nhận 4 marker • Tự đọc mã đề • Dữ liệu cá nhân hóa theo giáo viên</small></div>
 <div class="accountHeader"><span class="badge">Auto OMR</span><span class="accountChip" id="headerAccountChip"><span class="accountDot" id="headerAccountDot"></span><span id="headerAccountText">Đang xác thực...</span></span><button class="headerLogoutBtn" id="headerLogoutBtn">Đăng xuất</button></div></header>
 <div class="wrap">
 <div class="tabs noPrint"><button data-tab="templates" class="active">1. Mẫu phiếu</button><button data-tab="key">2. Mã đề & đáp án</button><button data-tab="print">3. In phiếu</button><button data-tab="scan">4. Chấm bằng camera</button><button data-tab="history">5. Lịch sử</button><button data-tab="account">6. Tài khoản & cá nhân hóa</button><button data-tab="admin" id="adminTabBtn" class="adminOnly">7. Quản trị hệ thống</button></div>
@@ -239,12 +259,41 @@ h2{font-size:19px}.sectionTitle{margin:16px 0 8px;font-size:15px;color:var(--bra
 <div class="row"><div><label>Điểm tối đa Phần I</label><input id="mcWeight" type="number" value="3" step="0.25"></div><div><label>Điểm mỗi ý Đúng/Sai đúng</label><input id="tfItemScore" type="number" value="0.25" min="0" step="0.05"></div><div><label>Điểm tối đa Phần III</label><input id="shortWeight" type="number" value="3" step="0.25"></div></div>
 <div class="row"><div><label>Điểm tối đa Phần II</label><input id="tfWeight" disabled></div><div style="align-self:end"><button class="btn primary" id="saveKey">Lưu đáp án mã đề này</button></div></div>
 <div class="keyTransfer">
-  <div class="help"><b>Chia sẻ đáp án giữa các máy:</b> Xuất một file chứa toàn bộ mã đề, đáp án, thiết lập điểm và phân công lớp/phòng của mẫu đang chọn. Người chấm khác chỉ cần nhập file này. Không chia sẻ file đáp án cho học sinh trước khi kết thúc bài kiểm tra.</div>
+  <div class="help"><b>Backup cá nhân:</b> File backup giữ cả bộ đáp án và phân công lớp/phòng của chính giáo viên. Dùng để sao lưu hoặc chuyển dữ liệu cá nhân giữa các thiết bị của cùng tài khoản.</div>
   <div class="keyTransferActions">
-    <button class="btn secondary" id="exportKeyFile">Xuất file đáp án</button>
-    <button class="btn secondary" id="importKeyFile">Nhập file đáp án</button>
+    <button class="btn secondary" id="exportKeyFile">Xuất backup cá nhân</button>
+    <button class="btn secondary" id="importKeyFile">Nhập backup cá nhân</button>
     <input id="importKeyInput" type="file" accept=".json,.omrkey,application/json" style="display:none">
   </div>
+</div>
+
+<div class="sharedKeyBox">
+  <h3>Gói đáp án dùng chung giữa giáo viên cùng khối</h3>
+  <div class="help">Gói chia sẻ chỉ chứa cấu trúc đề, mã đề, đáp án và cách tính điểm. <b>Không chứa</b> lớp/phòng được giao, lịch sử chấm, ảnh bài làm, dữ liệu học sinh hoặc hồ sơ cá nhân của người gửi.</div>
+  <div class="sharedMetaGrid">
+    <div><label>Khối</label><select id="shareGrade"><option value="6">Khối 6</option><option value="7">Khối 7</option><option value="8">Khối 8</option><option value="9">Khối 9</option></select></div>
+    <div><label>Tên gói chia sẻ</label><input id="shareTitle" placeholder="Ví dụ: KHTN 8 - Giữa HKI - Mã 101-104"></div>
+    <div><label>Ghi chú</label><input id="shareNote" placeholder="Ví dụ: Đề chung toàn khối"></div>
+  </div>
+  <div class="sharedKeyActions">
+    <button class="btn secondary" id="exportSharedKeyFile">Xuất gói dùng chung</button>
+    <button class="btn secondary" id="importSharedKeyFile">Nhập gói dùng chung</button>
+    <button class="btn good" id="publishSharedKey">Đăng lên kho đáp án chung</button>
+    <input id="importSharedKeyInput" type="file" accept=".json,.omrshare,.omrkey,application/json" style="display:none">
+  </div>
+</div>
+
+<div class="sharedLibraryBox">
+  <h3>Kho đáp án dùng chung của trường</h3>
+  <div class="help">Giáo viên đã được kích hoạt có thể xem và sao chép bộ đáp án về tài khoản của mình. Sau khi sao chép, giáo viên tự gán cho lớp/phòng mình phụ trách.</div>
+  <div class="sharedLibraryToolbar">
+    <div><label>Lọc khối</label><select id="sharedFilterGrade"><option value="">Tất cả khối</option><option value="6">Khối 6</option><option value="7">Khối 7</option><option value="8">Khối 8</option><option value="9">Khối 9</option></select></div>
+    <div><label>Lọc môn</label><input id="sharedFilterSubject" placeholder="Ví dụ: Toán"></div>
+    <div><label>Tìm tên / kỳ kiểm tra</label><input id="sharedFilterText" placeholder="Từ khóa..."></div>
+    <div><button class="btn secondary" id="refreshSharedKeys">Làm mới kho</button></div>
+  </div>
+  <div id="sharedLibraryStatus" class="help" style="margin-top:8px">Chưa tải kho đáp án.</div>
+  <div id="sharedLibraryList" class="sharedLibraryList"></div>
 </div>
 
 <div class="assignBox">
@@ -509,7 +558,7 @@ const DEFAULT_FIREBASE_CONFIG={
   messagingSenderId:'944038528926',
   appId:'1:944038528926:web:f459ff47eb84c4e0d4788f'
 };
-const LS_TPL='omr_templates_v3',LS_HIS='omr_history_v3',LS_ASSIGN='omr_assignments_v1',LS_IMG_MODE='omr_image_mode_v1',LS_IMG_RET='omr_image_retention_v1',LS_PROFILE='omr_teacher_profile_v1',LS_FB_CONFIG='omr_firebase_config_v1',IMG_DB='omr_mobile_images_v1',IMG_STORE='gradeImages',FIREBASE_SDK='12.18.0';let templates=[],assignments={},imgState=null,markerPoints=[],manualMode=false,lastGrade=null,H=null,imageDbPromise=null,currentViewerImageId=null,currentViewerUrl=null,currentUser=null,currentProfile={},firebaseCtx=null,firebaseModules=null,cloudSyncTimer=null,cloudLoading=false,deviceModeForced=false,currentIsAdmin=false,adminTeacherCache=[],adminSecondaryApp=null,adminDetailUid=null,adminSubjectStatsCache=[],adminClassStatsCache=[];
+const LS_TPL='omr_templates_v3',LS_HIS='omr_history_v3',LS_ASSIGN='omr_assignments_v1',LS_IMG_MODE='omr_image_mode_v1',LS_IMG_RET='omr_image_retention_v1',LS_PROFILE='omr_teacher_profile_v1',LS_FB_CONFIG='omr_firebase_config_v1',IMG_DB='omr_mobile_images_v1',IMG_STORE='gradeImages',FIREBASE_SDK='12.18.0';let templates=[],assignments={},imgState=null,markerPoints=[],manualMode=false,lastGrade=null,H=null,imageDbPromise=null,currentViewerImageId=null,currentViewerUrl=null,currentUser=null,currentProfile={},firebaseCtx=null,firebaseModules=null,cloudSyncTimer=null,cloudLoading=false,deviceModeForced=false,currentIsAdmin=false,adminTeacherCache=[],adminSecondaryApp=null,adminDetailUid=null,adminSubjectStatsCache=[],adminClassStatsCache=[],sharedKeyCache=[];
 function uid(){return 't'+Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 function scopeId(){return currentUser?.uid||'device'}
@@ -1117,7 +1166,7 @@ async function activateTeacher(user){
     if($('#cloudSyncStatus'))$('#cloudSyncStatus').textContent='Không tải được dữ liệu cloud, đang dùng bản lưu trên thiết bị.';
   }
   templates.forEach(normalizeTemplate);cleanupAssignments();writeScopedStateLocal();cloudLoading=false;
-  renderAccountState();applyProfileDefaults();initImageSettings();refreshSelects();fitSheet();unlockAppAfterLogin();queueCloudSync();if(currentIsAdmin)loadAdminDashboard();
+  renderAccountState();applyProfileDefaults();initImageSettings();refreshSelects();fitSheet();unlockAppAfterLogin();queueCloudSync();loadSharedAnswerLibrary();if(currentIsAdmin)loadAdminDashboard();
 }
 function currentCloudState(){
   const payload={
@@ -1127,7 +1176,7 @@ function currentCloudState(){
     imageMode:getImageMode(),
     imageRetention:getImageRetention(),
     updatedAt:new Date().toISOString(),
-    appVersion:'3.62'
+    appVersion:'3.63'
   };
   const stateJson=JSON.stringify(payload);
   // Firestore rejects nested arrays. Saving the OMR payload as JSON preserves
@@ -1136,7 +1185,7 @@ function currentCloudState(){
     stateJson,
     stateBytes:new Blob([stateJson]).size,
     updatedAt:payload.updatedAt,
-    appVersion:'3.62',
+    appVersion:'3.63',
     storageFormat:'json-v1'
   };
 }
@@ -1603,7 +1652,7 @@ $('#saveAssignments').onclick=()=>{
 function refreshVersions(){const t=cur($('#keyTpl').value)||templates[0];if(!t)return;normalizeTemplate(t);$('#keyTpl').value=t.id;const sv=$('#keyVersion'),old=sv.value;sv.innerHTML=t.versions.map(v=>`<option value="${esc(v.code)}">Mã ${esc(v.code)}</option>`).join('');if(t.versions.some(v=>v.code===old))sv.value=old;renderKey();renderAssignmentPanel()}
 function keyVersion(t){return t.versions.find(v=>v.code===$('#keyVersion').value)||t.versions[0]}
 function renderKey(){const t=cur($('#keyTpl').value)||templates[0];if(!t)return;normalizeTemplate(t);const v=keyVersion(t);$('#maxScore').value=t.maxScore;$('#mcWeight').value=t.weights.mc;$('#tfItemScore').value=t.tfItemScore;$('#tfWeight').value=(t.tfCount*4*t.tfItemScore).toFixed(2);$('#shortWeight').value=t.weights.short;let h='';if(t.mcCount)h+=`<div class="keySection"><h3>Phần I — Mã ${esc(v.code)}</h3><div class="answer-grid">${v.mcKey.map((x,i)=>`<div class="answer-cell"><b>Câu ${i+1}</b><select class="mcAns" data-i="${i}">${['A','B','C','D'].map(a=>`<option ${a===x?'selected':''}>${a}</option>`).join('')}</select></div>`).join('')}</div></div>`;if(t.tfCount)h+=`<div class="keySection"><h3>Phần II — Mã ${esc(v.code)}</h3><div class="answer-grid">${v.tfKey.map((arr,i)=>`<div class="answer-cell"><b>Câu ${i+1}</b><div class="tfKey">${arr.map((x,j)=>`<div><small>${'abcd'[j]}</small><select class="tfAns" data-i="${i}" data-j="${j}"><option ${x==='Đ'?'selected':''}>Đ</option><option ${x==='S'?'selected':''}>S</option></select></div>`).join('')}</div></div>`).join('')}</div></div>`;if(t.shortCount)h+=`<div class="keySection"><h3>Phần III — Mã ${esc(v.code)}</h3><div class="answer-grid">${v.shortKey.map((x,i)=>`<div class="answer-cell"><b>Câu ${i+1}</b><input class="shortAns" data-i="${i}" value="${esc(x)}" maxlength="${t.shortLen+2}" placeholder="-2,5"></div>`).join('')}</div></div>`;$('#keyEditor').innerHTML=h}
-$('#keyTpl').onchange=refreshVersions;$('#keyVersion').onchange=renderKey;$('#tfItemScore').oninput=()=>{const t=cur($('#keyTpl').value);if(t)$('#tfWeight').value=(t.tfCount*4*(+$('#tfItemScore').value||0)).toFixed(2)}
+$('#keyTpl').onchange=()=>{refreshVersions();syncShareMetaFromTemplate()};$('#keyVersion').onchange=renderKey;$('#tfItemScore').oninput=()=>{const t=cur($('#keyTpl').value);if(t)$('#tfWeight').value=(t.tfCount*4*(+$('#tfItemScore').value||0)).toFixed(2)}
 function normalizeShort(s){s=String(s??'').trim().replace(/\s+/g,'').replace('.',',');if(s.startsWith('+'))s=s.slice(1);if(/^[-+]?\d+,0+$/.test(s))s=s.replace(/,0+$/,'');if(/^(-?)0+(\d)/.test(s))s=s.replace(/^(-?)0+(\d)/,'$1$2');return s}
 function syncKeyEditorToTemplate(t,v){
   if(!t||!v)return;
@@ -1630,7 +1679,7 @@ function makeAnswerKeyPackage(t){
     format:'OMR_MOBILE_ANSWER_KEY',
     schemaVersion:1,
     exportedAt:new Date().toISOString(),
-    appVersion:'3.62',
+    appVersion:'3.63',
     template:{
       name:t.name,
       schoolName:t.schoolName||'',
@@ -1660,6 +1709,186 @@ function makeAnswerKeyPackage(t){
     }
   }
 }
+
+function makeSharedAnswerKeyPackage(t,meta={}){
+  normalizeTemplate(t);
+  return{
+    format:'OMR_MOBILE_SHARED_ANSWER_KEY',
+    schemaVersion:1,
+    exportedAt:new Date().toISOString(),
+    appVersion:'3.63',
+    meta:{
+      grade:String(meta.grade||''),
+      title:String(meta.title||t.name||'Bộ đáp án dùng chung'),
+      note:String(meta.note||'')
+    },
+    template:{
+      name:t.name,
+      testName:t.testName||'',
+      periodicMode:t.periodicMode||'class',
+      subject:t.subject||'',
+      duration:t.duration||'',
+      cut:t.cut||'normal',
+      examinerCount:+t.examinerCount||1,
+      examForm:t.examForm||'objective',
+      totalPages:+t.totalPages||2,
+      essayLineSpacing:+t.essayLineSpacing||9,
+      mcCount:+t.mcCount||0,
+      tfCount:+t.tfCount||0,
+      shortCount:+t.shortCount||0,
+      shortLen:+t.shortLen||4,
+      maxScore:+t.maxScore||10,
+      weights:{mc:+t.weights?.mc||0,short:+t.weights?.short||0},
+      tfItemScore:+t.tfItemScore||0,
+      versions:t.versions.map(v=>({
+        code:String(v.code),
+        mcKey:[...v.mcKey],
+        tfKey:v.tfKey.map(a=>[...a]),
+        shortKey:v.shortKey.map(normalizeShort)
+      }))
+    }
+  }
+}
+function validateSharedAnswerKeyPackage(pkg){
+  if(!pkg||pkg.format!=='OMR_MOBILE_SHARED_ANSWER_KEY'||!pkg.template)throw new Error('Đây không phải gói đáp án dùng chung của OMR Mobile.');
+  const k=pkg.template;
+  ['mcCount','tfCount','shortCount','shortLen'].forEach(x=>{if(!Number.isInteger(+k[x])||+k[x]<0)throw new Error('Cấu trúc gói đáp án không hợp lệ: '+x)});
+  if(+k.shortLen<3||+k.shortLen>5)throw new Error('Số vị trí trả lời ngắn không hợp lệ.');
+  if(!Array.isArray(k.versions)||!k.versions.length)throw new Error('Gói không có mã đề.');
+  const codes=k.versions.map(v=>String(v.code)),parsed=parseCodes(codes.join(','));
+  if(!parsed||parsed.length!==codes.length)throw new Error('Mã đề trong gói không hợp lệ.');
+  k.versions.forEach(v=>{
+    if(!Array.isArray(v.mcKey)||v.mcKey.length!==+k.mcCount||v.mcKey.some(a=>!['A','B','C','D'].includes(a)))throw new Error('Đáp án Phần I không hợp lệ ở mã '+v.code+'.');
+    if(!Array.isArray(v.tfKey)||v.tfKey.length!==+k.tfCount||v.tfKey.some(a=>!Array.isArray(a)||a.length!==4||a.some(x=>!['Đ','S'].includes(x))))throw new Error('Đáp án Phần II không hợp lệ ở mã '+v.code+'.');
+    if(!Array.isArray(v.shortKey)||v.shortKey.length!==+k.shortCount)throw new Error('Đáp án Phần III không hợp lệ ở mã '+v.code+'.');
+  });
+  return k;
+}
+function applySharedAnswerKeyToTemplate(target,k){
+  target.name=target.name||k.name||'Mẫu dùng chung';
+  target.testName=k.testName||target.testName||'KIỂM TRA THƯỜNG XUYÊN';
+  target.periodicMode=(k.periodicMode==='room'?'room':'class');
+  target.subject=k.subject||target.subject||'';
+  target.duration=Number.isFinite(+k.duration)&&+k.duration>0?+k.duration:target.duration;
+  target.cut=(k.cut==='cut'?'cut':'normal');
+  target.idMode=target.cut==='cut'?'phach':'sbd';
+  target.examinerCount=[1,2,3].includes(+k.examinerCount)?+k.examinerCount:1;
+  target.examForm=(k.examForm==='mixed'?'mixed':'objective');
+  target.totalPages=Math.max(2,Math.min(6,+k.totalPages||2));
+  target.essayLineSpacing=Math.max(1,Math.min(12,+k.essayLineSpacing||9));
+  target.mcCount=+k.mcCount||0;target.tfCount=+k.tfCount||0;target.shortCount=+k.shortCount||0;target.shortLen=+k.shortLen||4;
+  target.maxScore=Math.max(0,+k.maxScore||10);
+  target.weights={mc:Math.max(0,+k.weights?.mc||0),short:Math.max(0,+k.weights?.short||0)};
+  target.tfItemScore=Math.max(0,+k.tfItemScore||0);
+  target.versions=k.versions.map(v=>({
+    code:String(v.code),
+    mcKey:v.mcKey.map(String),
+    tfKey:v.tfKey.map(a=>a.map(String)),
+    shortKey:v.shortKey.map(normalizeShort)
+  }));
+  normalizeTemplate(target);
+}
+function createTemplateFromSharedPackage(pkg){
+  const k=validateSharedAnswerKeyPackage(pkg),codes=k.versions.map(v=>String(v.code));
+  const baseName=pkg.meta?.title||k.name||'Bộ đáp án dùng chung';
+  const t=makeTemplate(baseName,+k.mcCount,+k.tfCount,+k.shortCount,k.cut==='cut'?'cut':'normal',codes);
+  t.shortLen=+k.shortLen;applySharedAnswerKeyToTemplate(t,k);
+  return t;
+}
+function chooseSharedImportMode(selected){
+  if(!selected)return 'new';
+  const ans=prompt(`Nhập gói đáp án dùng chung:\n\n1 = Tạo bản sao mới (khuyên dùng)\n2 = Ghi đè mẫu đang chọn: ${selected.name}\n0 = Hủy\n\nNhập 1, 2 hoặc 0:`, '1');
+  if(ans===null||String(ans).trim()==='0')return 'cancel';
+  return String(ans).trim()==='2'?'overwrite':'new';
+}
+function importSharedPackageObject(pkg,sourceLabel='gói dùng chung'){
+  const k=validateSharedAnswerKeyPackage(pkg),selected=cur($('#keyTpl').value),mode=chooseSharedImportMode(selected);
+  if(mode==='cancel')return null;
+  let target;
+  if(mode==='overwrite'&&selected){
+    target=selected;applySharedAnswerKeyToTemplate(target,k);
+  }else{
+    target=createTemplateFromSharedPackage(pkg);
+    target.name=(pkg.meta?.title||target.name)+' (bản sao)';templates.push(target);
+  }
+  saveAll();refreshSelects();$('#keyTpl').value=target.id;refreshVersions();renderAssignmentPanel();
+  if($('#scanSource'))$('#scanSource').value='assigned';
+  alert(`Đã nhập ${target.versions.length} mã đề từ ${sourceLabel}.\n\nKhông nhập lớp/phòng của người chia sẻ. Hãy gán mẫu này cho lớp/phòng bạn phụ trách ở phần "Gán mẫu & đáp án".`);
+  return target;
+}
+function getSharedMetaInputs(){
+  const t=cur($('#keyTpl').value);
+  return{
+    grade:$('#shareGrade').value,
+    title:$('#shareTitle').value.trim()||(t?`${t.subject||''} ${$('#shareGrade').value} - ${t.testName||''} - ${t.name}`.trim():'Bộ đáp án dùng chung'),
+    note:$('#shareNote').value.trim()
+  }
+}
+function syncShareMetaFromTemplate(){
+  const t=cur($('#keyTpl').value);if(!t)return;
+  if(!$('#shareTitle').value.trim())$('#shareTitle').value=`${t.subject||''} - ${t.testName||''} - ${t.name}`.replace(/\s+/g,' ').trim();
+}
+async function publishSharedAnswerKey(){
+  if(!currentUser||!firebaseCtx){alert('Cần đăng nhập Firebase.');return}
+  const t=cur($('#keyTpl').value);if(!t){alert('Chưa chọn mẫu.');return}
+  const v=keyVersion(t);syncKeyEditorToTemplate(t,v);saveAll();
+  const meta=getSharedMetaInputs(),pkg=makeSharedAnswerKeyPackage(t,meta),json=JSON.stringify(pkg);
+  if(json.length>900000){alert('Gói đáp án quá lớn để đưa lên Firestore. Hãy dùng xuất file.');return}
+  if(!confirm(`Đăng bộ đáp án "${meta.title}" lên kho chung Khối ${meta.grade}?\n\nGói này không chứa lớp/phòng, lịch sử chấm hoặc ảnh bài làm.`))return;
+  try{
+    const m=firebaseModules.firestore;
+    await m.addDoc(m.collection(firebaseCtx.db,'sharedAnswerPackages'),{
+      format:'OMR_MOBILE_SHARED_ANSWER_KEY',schemaVersion:1,title:meta.title,grade:String(meta.grade),
+      subject:t.subject||'',testName:t.testName||'',templateName:t.name||'',versionCodes:t.versions.map(x=>String(x.code)).join(', '),
+      note:meta.note||'',ownerUid:currentUser.uid,ownerName:currentProfile?.name||currentUser.email||'',ownerEmail:currentUser.email||'',
+      createdAt:new Date().toISOString(),packageJson:json
+    });
+    alert('Đã đăng bộ đáp án lên kho dùng chung.');await loadSharedAnswerLibrary();
+  }catch(e){alert('Không đăng được lên kho đáp án: '+friendlyFirebaseError(e))}
+}
+async function loadSharedAnswerLibrary(){
+  const status=$('#sharedLibraryStatus'),list=$('#sharedLibraryList');if(!status||!list)return;
+  if(!currentUser||!firebaseCtx){status.textContent='Chưa đăng nhập Firebase.';list.innerHTML='';return}
+  status.textContent='Đang tải kho đáp án…';
+  try{
+    const m=firebaseModules.firestore,q=await m.getDocs(m.collection(firebaseCtx.db,'sharedAnswerPackages'));
+    sharedKeyCache=q.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>new Date(b.createdAt||0)-new Date(a.createdAt||0));renderSharedAnswerLibrary();
+  }catch(e){status.textContent='Không tải được kho đáp án: '+friendlyFirebaseError(e);list.innerHTML=''}
+}
+function renderSharedAnswerLibrary(){
+  const status=$('#sharedLibraryStatus'),list=$('#sharedLibraryList');if(!status||!list)return;
+  const grade=$('#sharedFilterGrade').value,subject=$('#sharedFilterSubject').value.trim().toLowerCase(),txt=$('#sharedFilterText').value.trim().toLowerCase();
+  const rows=sharedKeyCache.filter(x=>{
+    if(grade&&String(x.grade)!==grade)return false;
+    if(subject&&!String(x.subject||'').toLowerCase().includes(subject))return false;
+    if(txt&&!`${x.title||''} ${x.testName||''} ${x.templateName||''} ${x.versionCodes||''}`.toLowerCase().includes(txt))return false;
+    return true;
+  });
+  status.textContent=`Có ${rows.length}/${sharedKeyCache.length} gói đáp án phù hợp.`;
+  list.innerHTML=rows.length?rows.map(x=>{
+    const canDelete=currentIsAdmin||x.ownerUid===currentUser?.uid;
+    return `<div class="sharedPackageCard"><div><h4>${esc(x.title||x.templateName||'Bộ đáp án')}</h4><div class="sharedPackageMeta"><span class="sharedPackageBadge">Khối ${esc(x.grade||'')}</span><span class="sharedPackageOwner">${esc(x.ownerName||x.ownerEmail||'Người đăng')}</span><br>${esc(x.subject||'')} • ${esc(x.testName||'')} • Mã đề: ${esc(x.versionCodes||'—')}<br>${x.note?`Ghi chú: ${esc(x.note)}<br>`:''}Đăng: ${esc(fmtHistoryTime(x.createdAt))}</div></div><div class="sharedPackageActions"><button class="btn good" onclick="copySharedPackage('${esc(x.id)}')">Sao chép về tài khoản</button><button class="btn secondary" onclick="downloadSharedCloudPackage('${esc(x.id)}')">Tải file</button>${canDelete?`<button class="btn danger" onclick="deleteSharedCloudPackage('${esc(x.id)}')">Xóa khỏi kho</button>`:''}</div></div>`;
+  }).join(''):'<div class="notice">Chưa có gói đáp án phù hợp.</div>';
+}
+async function copySharedCloudPackage(id){
+  const x=sharedKeyCache.find(a=>a.id===id);if(!x)return;
+  try{importSharedPackageObject(JSON.parse(x.packageJson),'kho đáp án chung')}catch(e){alert('Gói đáp án trên kho không hợp lệ: '+(e?.message||e))}
+}
+async function downloadSharedCloudPackage(id){
+  const x=sharedKeyCache.find(a=>a.id===id);if(!x)return;
+  try{downloadKeyFile(`goi_dap_an_khoi_${safeKeyFileName(x.grade)}_${safeKeyFileName(x.title)}.omrshare.json`,JSON.parse(x.packageJson))}catch(e){alert('Không tải được gói đáp án.')}
+}
+async function deleteSharedCloudPackage(id){
+  const x=sharedKeyCache.find(a=>a.id===id);if(!x)return;
+  if(!(currentIsAdmin||x.ownerUid===currentUser?.uid)){alert('Bạn không có quyền xóa gói này.');return}
+  if(!confirm(`Xóa "${x.title||'gói đáp án'}" khỏi kho dùng chung?`))return;
+  try{await firebaseModules.firestore.deleteDoc(firebaseModules.firestore.doc(firebaseCtx.db,'sharedAnswerPackages',id));await loadSharedAnswerLibrary()}
+  catch(e){alert('Không xóa được: '+friendlyFirebaseError(e))}
+}
+window.copySharedPackage=id=>copySharedCloudPackage(id);
+window.downloadSharedCloudPackage=id=>downloadSharedCloudPackage(id);
+window.deleteSharedCloudPackage=id=>deleteSharedCloudPackage(id);
+
 function validateAnswerKeyPackage(pkg){
   if(!pkg||pkg.format!=='OMR_MOBILE_ANSWER_KEY'||!pkg.template)throw new Error('Đây không phải file đáp án của OMR Mobile.');
   const k=pkg.template;
@@ -1734,6 +1963,27 @@ $('#importKeyInput').onchange=async e=>{
     alert('Không thể nhập file đáp án: '+(err&&err.message?err.message:'File không hợp lệ.'))
   }finally{e.target.value=''}
 }
+
+
+$('#exportSharedKeyFile').onclick=()=>{
+  const t=cur($('#keyTpl').value);if(!t){alert('Chưa chọn mẫu.');return}
+  const v=keyVersion(t);syncKeyEditorToTemplate(t,v);saveAll();const meta=getSharedMetaInputs(),pkg=makeSharedAnswerKeyPackage(t,meta);
+  downloadKeyFile(`goi_dap_an_khoi_${safeKeyFileName(meta.grade)}_${safeKeyFileName(meta.title)}.omrshare.json`,pkg);
+};
+$('#importSharedKeyFile').onclick=()=>$('#importSharedKeyInput').click();
+$('#importSharedKeyInput').onchange=async e=>{
+  const file=e.target.files&&e.target.files[0];if(!file)return;
+  try{importSharedPackageObject(JSON.parse(await file.text()),'file dùng chung')}
+  catch(err){alert('Không thể nhập gói đáp án dùng chung: '+(err?.message||'File không hợp lệ.'))}
+  finally{e.target.value=''}
+};
+$('#publishSharedKey').onclick=publishSharedAnswerKey;
+$('#refreshSharedKeys').onclick=loadSharedAnswerLibrary;
+$('#sharedFilterGrade').onchange=renderSharedAnswerLibrary;
+$('#sharedFilterSubject').oninput=renderSharedAnswerLibrary;
+$('#sharedFilterText').oninput=renderSharedAnswerLibrary;
+$('#shareGrade').onchange=syncShareMetaFromTemplate;
+$('#shareTitle').addEventListener('focus',syncShareMetaFromTemplate);
 
 function buildLayout(t){
 normalizeTemplate(t);
@@ -2078,7 +2328,7 @@ $('#detailTeacherBackup').onclick=()=>{if(adminDetailUid)downloadTeacherBackup(a
 $('#detailTeacherResetPassword').onclick=()=>{if(adminDetailUid)sendTeacherPasswordReset(adminDetailUid)};
 
 
-document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');$('#panel-'+b.dataset.tab).classList.add('active');if(b.dataset.tab==='print')setTimeout(fitSheet,20);if(b.dataset.tab==='account')renderAccountState();if(b.dataset.tab==='admin'&&currentIsAdmin)loadAdminDashboard()});function fitSheet(){const vp=$('#sheetViewport'),sh=$('#sheet');if(!vp||!sh)return;const sc=Math.min(1,(vp.clientWidth-24)/794);sh.style.transform=`scale(${sc})`;sh.style.marginBottom=`${1123*(sc-1)}px`;document.querySelectorAll('.essayPage').forEach(pg=>{pg.style.transform=`scale(${sc})`;pg.style.transformOrigin='top left';pg.style.marginBottom=`${1123*(sc-1)+16}px`})}
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');$('#panel-'+b.dataset.tab).classList.add('active');if(b.dataset.tab==='print')setTimeout(fitSheet,20);if(b.dataset.tab==='account')renderAccountState();if(b.dataset.tab==='key'){syncShareMetaFromTemplate();loadSharedAnswerLibrary()}if(b.dataset.tab==='admin'&&currentIsAdmin)loadAdminDashboard()});function fitSheet(){const vp=$('#sheetViewport'),sh=$('#sheet');if(!vp||!sh)return;const sc=Math.min(1,(vp.clientWidth-24)/794);sh.style.transform=`scale(${sc})`;sh.style.marginBottom=`${1123*(sc-1)}px`;document.querySelectorAll('.essayPage').forEach(pg=>{pg.style.transform=`scale(${sc})`;pg.style.transformOrigin='top left';pg.style.marginBottom=`${1123*(sc-1)+16}px`})}
 
 
 function refreshScanAssignments(){
