@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>OMR Mobile v3.59 - Thông tin bài kiểm tra hoàn chỉnh</title>
+<title>OMR Mobile v3.60 - Thông tin bài kiểm tra hoàn chỉnh</title>
 <style>
 :root{--bg:#f4f7fb;--card:#fff;--ink:#172033;--muted:#6b7280;--line:#d8deea;--brand:#1769e0;--brand2:#0b4fb3;--good:#128a4b;--bad:#c0392b;--warn:#a76500;--soft:#eef5ff}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
@@ -60,6 +60,17 @@ h2{font-size:19px}.sectionTitle{margin:16px 0 8px;font-size:15px;color:var(--bra
 .imageSettingsGrid{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end}
 .imageSettings .help{margin-top:7px}
 
+
+
+.adminOnly{display:none}
+.adminBadge{display:inline-flex;align-items:center;padding:4px 8px;border-radius:999px;background:#7c2d12;color:#fff;font-size:10px;font-weight:900;letter-spacing:.4px}
+.adminStats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0}
+.adminStat{border:1px solid var(--line);border-radius:12px;background:#fff;padding:12px}.adminStat b{display:block;font-size:22px}.adminStat span{font-size:11px;color:var(--muted)}
+.adminGrid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.adminCreate{grid-column:span 4}.adminUsers{grid-column:span 8}
+.adminTableActions{display:flex;gap:5px;flex-wrap:wrap;min-width:220px}.adminTableActions button{border:0;border-radius:7px;padding:5px 7px;font-size:10.5px;font-weight:800;cursor:pointer}
+.adminBtnLock{background:#fff4df;color:#8a5600}.adminBtnRole{background:#eee9ff;color:#5b21b6}.adminBtnBackup{background:#eaf2ff;color:#0b4fb3}.adminBtnDanger{background:#fff0ef;color:#a22}
+.adminNotice{padding:10px 12px;border:1px solid #fed7aa;border-radius:10px;background:#fff7ed;font-size:12px;line-height:1.5}
+@media(max-width:950px){.adminCreate,.adminUsers{grid-column:span 12}.adminStats{grid-template-columns:1fr 1fr}}
 
 .accountHeader{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .accountChip{display:flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:999px;padding:6px 10px;background:#fff;font-size:12px;font-weight:800;cursor:pointer}
@@ -118,10 +129,10 @@ h2{font-size:19px}.sectionTitle{margin:16px 0 8px;font-size:15px;color:var(--bra
 </style>
 </head>
 <body>
-<header><div><h1>OMR Mobile v3.59</h1><small>Tự nhận 4 marker • Tự đọc mã đề • Dữ liệu cá nhân hóa theo giáo viên</small></div>
+<header><div><h1>OMR Mobile v3.60</h1><small>Tự nhận 4 marker • Tự đọc mã đề • Dữ liệu cá nhân hóa theo giáo viên</small></div>
 <div class="accountHeader"><span class="badge">Auto OMR</span><span class="accountChip" id="headerAccountChip"><span class="accountDot" id="headerAccountDot"></span><span id="headerAccountText">Thiết bị này</span></span></div></header>
 <div class="wrap">
-<div class="tabs noPrint"><button data-tab="templates" class="active">1. Mẫu phiếu</button><button data-tab="key">2. Mã đề & đáp án</button><button data-tab="print">3. In phiếu</button><button data-tab="scan">4. Chấm bằng camera</button><button data-tab="history">5. Lịch sử</button><button data-tab="account">6. Tài khoản & cá nhân hóa</button></div>
+<div class="tabs noPrint"><button data-tab="templates" class="active">1. Mẫu phiếu</button><button data-tab="key">2. Mã đề & đáp án</button><button data-tab="print">3. In phiếu</button><button data-tab="scan">4. Chấm bằng camera</button><button data-tab="history">5. Lịch sử</button><button data-tab="account">6. Tài khoản & cá nhân hóa</button><button data-tab="admin" id="adminTabBtn" class="adminOnly">7. Quản trị hệ thống</button></div>
 
 <section id="panel-templates" class="panel active"><div class="grid"><div class="card span5">
 <h2 style="margin-top:0">Tạo mẫu phiếu hoàn chỉnh</h2><div class="notice" style="margin-bottom:10px"><b>Khổ giấy mặc định:</b> A4 • Hướng dọc (Portrait)</div>
@@ -264,6 +275,63 @@ h2{font-size:19px}.sectionTitle{margin:16px 0 8px;font-size:15px;color:var(--bra
 <div style="overflow:auto;margin-top:12px"><table class="table"><thead><tr><th>Thời gian</th><th>Học sinh</th><th>Lớp/Phòng</th><th>Mã đề</th><th>Mẫu</th><th>I</th><th>II</th><th>III</th><th>Tổng</th><th>Ảnh</th></tr></thead><tbody id="historyBody"></tbody></table></div>
 </div></section>
 
+
+<section id="panel-admin" class="panel">
+<div class="card">
+  <div class="row">
+    <div><h2 style="margin:0">Quản trị toàn bộ ứng dụng <span class="adminBadge">SUPER ADMIN</span></h2>
+    <div class="help">Quản lý giáo viên, quyền truy cập và dữ liệu OMR trên toàn hệ thống.</div></div>
+    <div><button class="btn secondary" id="refreshAdminDashboard">Làm mới dữ liệu</button></div>
+  </div>
+
+  <div class="adminStats">
+    <div class="adminStat"><b id="adminTeacherCount">0</b><span>Giáo viên</span></div>
+    <div class="adminStat"><b id="adminActiveCount">0</b><span>Tài khoản đang hoạt động</span></div>
+    <div class="adminStat"><b id="adminTemplateCount">0</b><span>Tổng mẫu phiếu</span></div>
+    <div class="adminStat"><b id="adminGradeCount">0</b><span>Tổng lượt chấm</span></div>
+  </div>
+
+  <div class="adminGrid">
+    <div class="adminCreate">
+      <div class="accountBox" style="margin-top:0">
+        <h3>Tạo tài khoản giáo viên</h3>
+        <label>Email</label><input id="adminCreateEmail" type="email" placeholder="giaovien@truong.edu.vn">
+        <label>Mật khẩu ban đầu</label><input id="adminCreatePassword" type="password" minlength="6" placeholder="Tối thiểu 6 ký tự">
+        <label>Họ tên</label><input id="adminCreateName" placeholder="Nguyễn Văn A">
+        <label>Mã giáo viên</label><input id="adminCreateCode" placeholder="GV001">
+        <label>Tổ chuyên môn</label><input id="adminCreateDepartment" placeholder="Tổ Toán">
+        <label>Môn mặc định</label><input id="adminCreateSubject" placeholder="Toán">
+        <div class="accountActions"><button class="btn primary" id="adminCreateTeacher">Tạo & kích hoạt</button></div>
+      </div>
+
+      <div class="accountBox">
+        <h3>Kích hoạt UID đã có</h3>
+        <div class="help">Dùng khi tài khoản đã được tạo trong Firebase Authentication trước đó.</div>
+        <label>Firebase UID</label><input id="adminExistingUid" placeholder="Dán UID">
+        <label>Email</label><input id="adminExistingEmail" type="email">
+        <label>Họ tên</label><input id="adminExistingName">
+        <div class="accountActions"><button class="btn secondary" id="adminActivateExisting">Kích hoạt UID</button></div>
+      </div>
+
+      <div class="adminNotice">
+        <b>Quan trọng:</b> Super Admin đầu tiên phải được khởi tạo một lần trong Firebase Console bằng document <code>admins/{UID}</code>. Sau đó Admin có thể cấp/thu quyền Admin ngay tại đây.
+      </div>
+    </div>
+
+    <div class="adminUsers">
+      <div class="accountBox" style="margin-top:0">
+        <div class="row"><h3 style="margin:0">Danh sách giáo viên</h3><input id="adminTeacherSearch" placeholder="Tìm tên, email, mã GV..." style="max-width:280px"></div>
+        <div id="adminLoadStatus" class="help" style="margin:7px 0">Chưa tải dữ liệu.</div>
+        <div style="overflow:auto"><table class="table">
+          <thead><tr><th>Giáo viên</th><th>Tổ / Môn</th><th>Trạng thái</th><th>Mẫu</th><th>Lượt chấm</th><th>Quyền</th><th>Thao tác</th></tr></thead>
+          <tbody id="adminTeacherBody"></tbody>
+        </table></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
 <section id="panel-account" class="panel">
 <div class="accountGrid">
   <div class="card accountLeft">
@@ -295,10 +363,10 @@ h2{font-size:19px}.sectionTitle{margin:16px 0 8px;font-size:15px;color:var(--bra
       <label>Mật khẩu</label><input id="authPassword" type="password" minlength="6" placeholder="Tối thiểu 6 ký tự">
       <div class="accountActions">
         <button class="btn primary" id="loginTeacher">Đăng nhập</button>
-        <button class="btn secondary" id="registerTeacher">Tạo tài khoản</button>
+        <button class="btn secondary" id="registerTeacher" style="display:none">Tạo tài khoản</button>
         <button class="btn danger" id="logoutTeacher" style="display:none">Đăng xuất</button>
       </div>
-      <div class="help" style="margin-top:8px">Khi triển khai chính thức, nhà trường có thể tạo tài khoản sẵn trong Firebase Authentication và không cho giáo viên tự đăng ký.</div>
+      <div class="help" style="margin-top:8px">Tài khoản giáo viên do Super Admin tạo trong tab Quản trị hệ thống. Người dùng thông thường không tự cấp quyền truy cập dữ liệu.</div>
     </div>
 
     <div class="accountBox">
@@ -358,7 +426,7 @@ h2{font-size:19px}.sectionTitle{margin:16px 0 8px;font-size:15px;color:var(--bra
 
 <script>
 const $=s=>document.querySelector(s), SHORT_SYMS=['-','0','1','2','3','4','5','6','7','8','9',','];
-const LS_TPL='omr_templates_v3',LS_HIS='omr_history_v3',LS_ASSIGN='omr_assignments_v1',LS_IMG_MODE='omr_image_mode_v1',LS_IMG_RET='omr_image_retention_v1',LS_PROFILE='omr_teacher_profile_v1',LS_FB_CONFIG='omr_firebase_config_v1',IMG_DB='omr_mobile_images_v1',IMG_STORE='gradeImages',FIREBASE_SDK='12.18.0';let templates=[],assignments={},imgState=null,markerPoints=[],manualMode=false,lastGrade=null,H=null,imageDbPromise=null,currentViewerImageId=null,currentViewerUrl=null,currentUser=null,currentProfile={},firebaseCtx=null,firebaseModules=null,cloudSyncTimer=null,cloudLoading=false,deviceModeForced=false;
+const LS_TPL='omr_templates_v3',LS_HIS='omr_history_v3',LS_ASSIGN='omr_assignments_v1',LS_IMG_MODE='omr_image_mode_v1',LS_IMG_RET='omr_image_retention_v1',LS_PROFILE='omr_teacher_profile_v1',LS_FB_CONFIG='omr_firebase_config_v1',IMG_DB='omr_mobile_images_v1',IMG_STORE='gradeImages',FIREBASE_SDK='12.18.0';let templates=[],assignments={},imgState=null,markerPoints=[],manualMode=false,lastGrade=null,H=null,imageDbPromise=null,currentViewerImageId=null,currentViewerUrl=null,currentUser=null,currentProfile={},firebaseCtx=null,firebaseModules=null,cloudSyncTimer=null,cloudLoading=false,deviceModeForced=false,currentIsAdmin=false,adminTeacherCache=[],adminSecondaryApp=null;
 function uid(){return 't'+Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 function scopeId(){return currentUser?.uid||'device'}
@@ -447,6 +515,9 @@ function renderAccountState(){
   if($('#registerTeacher'))$('#registerTeacher').disabled=!firebaseCtx||!!currentUser;
   if($('#importLegacyToTeacher'))$('#importLegacyToTeacher').disabled=!currentUser;
   if($('#syncCloudNow'))$('#syncCloudNow').disabled=!currentUser||!firebaseCtx;
+  if($('#adminTabBtn'))$('#adminTabBtn').style.display=currentIsAdmin?'inline-block':'none';
+  const chip=$('#headerAccountText');
+  if(chip&&currentIsAdmin&&!chip.textContent.includes('ADMIN'))chip.innerHTML=`${esc(name)} <span class="adminBadge">ADMIN</span>`;
   fillProfileForm();
 }
 function collectProfileForm(){
@@ -487,9 +558,183 @@ function loadScopedStateOnly(){
 function writeScopedStateLocal(){
   setScoped(LS_TPL,JSON.stringify(templates));setScoped(LS_ASSIGN,JSON.stringify(assignments));setScoped(LS_PROFILE,JSON.stringify(currentProfile||{}));
 }
+
+async function checkAdminRole(uid){
+  if(!firebaseCtx||!uid)return false;
+  try{
+    const s=await firebaseModules.firestore.getDoc(firebaseModules.firestore.doc(firebaseCtx.db,'admins',uid));
+    return s.exists();
+  }catch(e){console.warn('Không kiểm tra được quyền Admin',e);return false}
+}
+async function checkAccessRole(uid){
+  if(!firebaseCtx||!uid)return false;
+  try{
+    const s=await firebaseModules.firestore.getDoc(firebaseModules.firestore.doc(firebaseCtx.db,'access',uid));
+    return s.exists()&&s.data()?.active===true;
+  }catch(e){console.warn('Không kiểm tra được access',e);return false}
+}
+async function createTeacherProfileDocs(uid,data={}){
+  const m=firebaseModules.firestore,now=new Date().toISOString();
+  await Promise.all([
+    m.setDoc(m.doc(firebaseCtx.db,'teachers',uid),{
+      email:data.email||'',name:data.name||'',code:data.code||'',department:data.department||'',
+      subject:data.subject||'',school:data.school||'',createdAt:data.createdAt||now,updatedAt:now
+    },{merge:true}),
+    m.setDoc(m.doc(firebaseCtx.db,'access',uid),{active:true,updatedAt:now,updatedBy:currentUser?.uid||''},{merge:true})
+  ]);
+}
+async function createTeacherAuthByAdmin(){
+  if(!currentIsAdmin||!firebaseCtx){alert('Chỉ Super Admin được tạo giáo viên.');return}
+  const email=$('#adminCreateEmail').value.trim(),password=$('#adminCreatePassword').value,
+        name=$('#adminCreateName').value.trim(),code=$('#adminCreateCode').value.trim(),
+        department=$('#adminCreateDepartment').value.trim(),subject=$('#adminCreateSubject').value.trim();
+  if(!email||password.length<6){alert('Nhập email và mật khẩu tối thiểu 6 ký tự.');return}
+  const btn=$('#adminCreateTeacher');btn.disabled=true;
+  try{
+    const appName='adminCreator_'+Date.now();
+    const secApp=firebaseModules.app.initializeApp(firebaseCtx.config,appName);
+    const secAuth=firebaseModules.auth.getAuth(secApp);
+    let cred;
+    try{cred=await firebaseModules.auth.createUserWithEmailAndPassword(secAuth,email,password)}
+    finally{
+      try{await firebaseModules.auth.signOut(secAuth)}catch(e){}
+      try{await firebaseModules.app.deleteApp(secApp)}catch(e){}
+    }
+    const uid=cred.user.uid;
+    await createTeacherProfileDocs(uid,{email,name,code,department,subject});
+    alert(`Đã tạo giáo viên ${email}\nUID: ${uid}`);
+    ['adminCreateEmail','adminCreatePassword','adminCreateName','adminCreateCode','adminCreateDepartment','adminCreateSubject'].forEach(id=>$('#'+id).value='');
+    await loadAdminDashboard();
+  }catch(e){alert('Không tạo được tài khoản: '+friendlyFirebaseError(e))}
+  finally{btn.disabled=false}
+}
+async function activateExistingTeacher(){
+  if(!currentIsAdmin)return;
+  const uid=$('#adminExistingUid').value.trim(),email=$('#adminExistingEmail').value.trim(),name=$('#adminExistingName').value.trim();
+  if(!uid){alert('Cần Firebase UID.');return}
+  try{
+    await createTeacherProfileDocs(uid,{email,name});
+    alert('Đã kích hoạt UID này.');
+    await loadAdminDashboard();
+  }catch(e){alert('Không kích hoạt được: '+friendlyFirebaseError(e))}
+}
+async function setTeacherAccess(uid,active){
+  if(!currentIsAdmin||uid===currentUser?.uid&&active===false){alert('Không thể tự khóa tài khoản Admin đang đăng nhập.');return}
+  const m=firebaseModules.firestore;
+  await m.setDoc(m.doc(firebaseCtx.db,'access',uid),{active,updatedAt:new Date().toISOString(),updatedBy:currentUser.uid},{merge:true});
+  await loadAdminDashboard();
+}
+async function setTeacherAdmin(uid,makeAdmin){
+  if(!currentIsAdmin)return;
+  if(uid===currentUser?.uid&&!makeAdmin){alert('Không thể tự thu quyền Admin của chính mình trong app.');return}
+  const m=firebaseModules.firestore,ref=m.doc(firebaseCtx.db,'admins',uid);
+  if(makeAdmin)await m.setDoc(ref,{role:'superadmin',createdAt:new Date().toISOString(),createdBy:currentUser.uid},{merge:true});
+  else await m.deleteDoc(ref);
+  await loadAdminDashboard();
+}
+async function downloadTeacherBackup(uid){
+  if(!currentIsAdmin)return;
+  try{
+    const m=firebaseModules.firestore;
+    const [p,s,a]=await Promise.all([
+      m.getDoc(m.doc(firebaseCtx.db,'teachers',uid)),
+      m.getDoc(m.doc(firebaseCtx.db,'teachers',uid,'app','state')),
+      m.getDoc(m.doc(firebaseCtx.db,'access',uid))
+    ]);
+    const payload={uid,profile:p.exists()?p.data():null,access:a.exists()?a.data():null,state:s.exists()?s.data():null,exportedAt:new Date().toISOString()};
+    const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}),u=URL.createObjectURL(blob),link=document.createElement('a');
+    link.href=u;link.download=`OMR_Backup_${safeFilePart(payload.profile?.name||payload.profile?.email||uid)}.json`;document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(u),1000);
+  }catch(e){alert('Không tải được backup: '+friendlyFirebaseError(e))}
+}
+async function clearTeacherOmrData(uid){
+  if(!currentIsAdmin||uid===currentUser?.uid){alert('Không xóa dữ liệu của tài khoản Admin đang sử dụng bằng nút này.');return}
+  const t=adminTeacherCache.find(x=>x.uid===uid),name=t?.profile?.name||t?.profile?.email||uid;
+  const code=prompt(`Xóa toàn bộ mẫu, đáp án và lịch sử chấm của ${name}?\nNhập XOA để xác nhận:`);
+  if(code!=='XOA')return;
+  try{
+    await firebaseModules.firestore.deleteDoc(firebaseModules.firestore.doc(firebaseCtx.db,'teachers',uid,'app','state'));
+    alert('Đã xóa dữ liệu OMR. Hồ sơ và tài khoản đăng nhập vẫn được giữ.');
+    await loadAdminDashboard();
+  }catch(e){alert('Không xóa được: '+friendlyFirebaseError(e))}
+}
+function parseAdminState(docData){
+  if(!docData)return{};
+  if(typeof docData.stateJson==='string'){try{return JSON.parse(docData.stateJson)}catch(e){return{}}}
+  return docData;
+}
+function renderAdminTeacherTable(){
+  const q=($('#adminTeacherSearch')?.value||'').trim().toLowerCase();
+  const rows=adminTeacherCache.filter(x=>{
+    const p=x.profile||{},hay=[p.name,p.email,p.code,p.department,p.subject,x.uid].join(' ').toLowerCase();
+    return !q||hay.includes(q);
+  });
+  $('#adminTeacherBody').innerHTML=rows.map(x=>{
+    const p=x.profile||{},role=x.isAdmin?'ADMIN':'Giáo viên',status=x.active?'Hoạt động':'Đã khóa';
+    return `<tr>
+      <td><b>${esc(p.name||'(chưa đặt tên)')}</b><br><span class="help">${esc(p.email||'')}</span><br><span class="help">${esc(p.code||x.uid)}</span></td>
+      <td>${esc(p.department||'')}<br><span class="help">${esc(p.subject||'')}</span></td>
+      <td>${x.active?'<span class="cloudBadge">Hoạt động</span>':'<span class="adminBadge">Đã khóa</span>'}</td>
+      <td>${x.templateCount}</td><td>${x.gradeCount}</td>
+      <td>${x.isAdmin?'<span class="adminBadge">ADMIN</span>':'Giáo viên'}</td>
+      <td><div class="adminTableActions">
+        <button class="adminBtnLock" onclick="adminToggleAccess('${esc(x.uid)}',${x.active?'false':'true'})">${x.active?'Khóa':'Mở khóa'}</button>
+        <button class="adminBtnRole" onclick="adminToggleRole('${esc(x.uid)}',${x.isAdmin?'false':'true'})">${x.isAdmin?'Thu Admin':'Cấp Admin'}</button>
+        <button class="adminBtnBackup" onclick="adminBackup('${esc(x.uid)}')">Backup</button>
+        <button class="adminBtnDanger" onclick="adminClearData('${esc(x.uid)}')">Xóa dữ liệu OMR</button>
+      </div></td>
+    </tr>`;
+  }).join('');
+}
+async function loadAdminDashboard(){
+  if(!currentIsAdmin||!firebaseCtx)return;
+  const status=$('#adminLoadStatus');if(status)status.textContent='Đang tải dữ liệu toàn hệ thống…';
+  try{
+    const m=firebaseModules.firestore;
+    const [teacherQ,accessQ,adminQ]=await Promise.all([
+      m.getDocs(m.collection(firebaseCtx.db,'teachers')),
+      m.getDocs(m.collection(firebaseCtx.db,'access')),
+      m.getDocs(m.collection(firebaseCtx.db,'admins'))
+    ]);
+    const accessMap=new Map(accessQ.docs.map(d=>[d.id,d.data()])),adminSet=new Set(adminQ.docs.map(d=>d.id)),list=[];
+    for(const d of teacherQ.docs){
+      let state={},templateCount=0,gradeCount=0;
+      try{
+        const s=await m.getDoc(m.doc(firebaseCtx.db,'teachers',d.id,'app','state'));
+        state=s.exists()?parseAdminState(s.data()):{};
+        templateCount=Array.isArray(state.templates)?state.templates.length:0;
+        gradeCount=Array.isArray(state.history)?state.history.length:0;
+      }catch(e){}
+      list.push({uid:d.id,profile:d.data()||{},active:accessMap.get(d.id)?.active===true,isAdmin:adminSet.has(d.id),templateCount,gradeCount});
+    }
+    adminTeacherCache=list.sort((a,b)=>(a.profile?.name||a.profile?.email||'').localeCompare(b.profile?.name||b.profile?.email||'','vi'));
+    $('#adminTeacherCount').textContent=list.length;
+    $('#adminActiveCount').textContent=list.filter(x=>x.active).length;
+    $('#adminTemplateCount').textContent=list.reduce((n,x)=>n+x.templateCount,0);
+    $('#adminGradeCount').textContent=list.reduce((n,x)=>n+x.gradeCount,0);
+    if(status)status.textContent=`Đã tải ${list.length} giáo viên lúc ${new Date().toLocaleTimeString('vi-VN')}.`;
+    renderAdminTeacherTable();
+  }catch(e){
+    if(status)status.textContent='Không tải được dữ liệu: '+friendlyFirebaseError(e);
+  }
+}
+window.adminToggleAccess=(uid,active)=>setTeacherAccess(uid,active);
+window.adminToggleRole=(uid,makeAdmin)=>setTeacherAdmin(uid,makeAdmin);
+window.adminBackup=uid=>downloadTeacherBackup(uid);
+window.adminClearData=uid=>clearTeacherOmrData(uid);
+
 async function activateTeacher(user){
   currentUser=user;deviceModeForced=false;cloudLoading=true;
-  setFirebaseStatus(`Đã đăng nhập: ${user.email||user.uid}`,'ok');
+  currentIsAdmin=await checkAdminRole(user.uid);
+  if(!currentIsAdmin){
+    const allowed=await checkAccessRole(user.uid);
+    if(!allowed){
+      cloudLoading=false;currentUser=null;currentIsAdmin=false;
+      alert('Tài khoản này chưa được Super Admin kích hoạt hoặc đã bị khóa.');
+      try{await firebaseModules.auth.signOut(firebaseCtx.auth)}catch(e){}
+      $('#authGate').classList.add('open');return;
+    }
+  }
+  setFirebaseStatus(currentIsAdmin?`SUPER ADMIN: ${user.email||user.uid}`:`Đã đăng nhập: ${user.email||user.uid}`,'ok');
   const localHad=hasScopedData(user.uid);
   loadScopedStateOnly();
   try{
@@ -523,7 +768,7 @@ async function activateTeacher(user){
     if($('#cloudSyncStatus'))$('#cloudSyncStatus').textContent='Không tải được dữ liệu cloud, đang dùng bản lưu trên thiết bị.';
   }
   templates.forEach(normalizeTemplate);cleanupAssignments();writeScopedStateLocal();cloudLoading=false;
-  renderAccountState();applyProfileDefaults();initImageSettings();refreshSelects();fitSheet();$('#authGate').classList.remove('open');queueCloudSync();
+  renderAccountState();applyProfileDefaults();initImageSettings();refreshSelects();fitSheet();$('#authGate').classList.remove('open');queueCloudSync();if(currentIsAdmin)loadAdminDashboard();
 }
 function currentCloudState(){
   const payload={
@@ -533,7 +778,7 @@ function currentCloudState(){
     imageMode:getImageMode(),
     imageRetention:getImageRetention(),
     updatedAt:new Date().toISOString(),
-    appVersion:'3.59'
+    appVersion:'3.60'
   };
   const stateJson=JSON.stringify(payload);
   // Firestore rejects nested arrays. Saving the OMR payload as JSON preserves
@@ -542,7 +787,7 @@ function currentCloudState(){
     stateJson,
     stateBytes:new Blob([stateJson]).size,
     updatedAt:payload.updatedAt,
-    appVersion:'3.59',
+    appVersion:'3.60',
     storageFormat:'json-v1'
   };
 }
@@ -598,7 +843,7 @@ async function importLegacyDataToCurrentTeacher(){
 }
 function switchToDeviceMode(){
   if(firebaseCtx?.auth?.currentUser)firebaseModules.auth.signOut(firebaseCtx.auth).catch(()=>{});
-  currentUser=null;deviceModeForced=true;loadScopedStateOnly();renderAccountState();initImageSettings();refreshSelects();fitSheet();$('#authGate').classList.remove('open');
+  currentUser=null;currentIsAdmin=false;deviceModeForced=true;loadScopedStateOnly();renderAccountState();initImageSettings();refreshSelects();fitSheet();$('#authGate').classList.remove('open');
 }
 
 function openImageDb(){
@@ -1036,7 +1281,7 @@ function makeAnswerKeyPackage(t){
     format:'OMR_MOBILE_ANSWER_KEY',
     schemaVersion:1,
     exportedAt:new Date().toISOString(),
-    appVersion:'3.59',
+    appVersion:'3.60',
     template:{
       name:t.name,
       schoolName:t.schoolName||'',
@@ -1455,13 +1700,7 @@ $('#loginTeacher').onclick=async()=>{
   try{await firebaseModules.auth.signInWithEmailAndPassword(firebaseCtx.auth,$('#authEmail').value.trim(),$('#authPassword').value)}
   catch(e){alert(friendlyFirebaseError(e))}
 };
-$('#registerTeacher').onclick=async()=>{
-  if(!firebaseCtx){alert('Chưa kết nối Firebase.');return}
-  const email=$('#authEmail').value.trim(),pass=$('#authPassword').value;
-  if(!confirm(`Tạo tài khoản giáo viên ${email}?`))return;
-  try{await firebaseModules.auth.createUserWithEmailAndPassword(firebaseCtx.auth,email,pass)}
-  catch(e){alert(friendlyFirebaseError(e))}
-};
+$('#registerTeacher').onclick=()=>alert('Tài khoản mới do Super Admin tạo trong tab Quản trị hệ thống.');
 $('#logoutTeacher').onclick=switchToDeviceMode;
 $('#saveTeacherProfile').onclick=async()=>{
   const p=collectProfileForm();saveLocalProfile(p);setScoped(LS_IMG_MODE,p.imageMode);setScoped(LS_IMG_RET,String(p.retention));initImageSettings();
@@ -1478,7 +1717,13 @@ $('#gateLogin').onclick=async()=>{
 $('#gateDeviceMode').onclick=switchToDeviceMode;
 $('#headerAccountChip').onclick=()=>{const b=document.querySelector('.tabs button[data-tab="account"]');if(b)b.click()};
 
-document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');$('#panel-'+b.dataset.tab).classList.add('active');if(b.dataset.tab==='print')setTimeout(fitSheet,20);if(b.dataset.tab==='account')renderAccountState()});function fitSheet(){const vp=$('#sheetViewport'),sh=$('#sheet');if(!vp||!sh)return;const sc=Math.min(1,(vp.clientWidth-24)/794);sh.style.transform=`scale(${sc})`;sh.style.marginBottom=`${1123*(sc-1)}px`;document.querySelectorAll('.essayPage').forEach(pg=>{pg.style.transform=`scale(${sc})`;pg.style.transformOrigin='top left';pg.style.marginBottom=`${1123*(sc-1)+16}px`})}
+$('#adminCreateTeacher').onclick=createTeacherAuthByAdmin;
+$('#adminActivateExisting').onclick=activateExistingTeacher;
+$('#refreshAdminDashboard').onclick=loadAdminDashboard;
+$('#adminTeacherSearch').oninput=renderAdminTeacherTable;
+
+
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');$('#panel-'+b.dataset.tab).classList.add('active');if(b.dataset.tab==='print')setTimeout(fitSheet,20);if(b.dataset.tab==='account')renderAccountState();if(b.dataset.tab==='admin'&&currentIsAdmin)loadAdminDashboard()});function fitSheet(){const vp=$('#sheetViewport'),sh=$('#sheet');if(!vp||!sh)return;const sc=Math.min(1,(vp.clientWidth-24)/794);sh.style.transform=`scale(${sc})`;sh.style.marginBottom=`${1123*(sc-1)}px`;document.querySelectorAll('.essayPage').forEach(pg=>{pg.style.transform=`scale(${sc})`;pg.style.transformOrigin='top left';pg.style.marginBottom=`${1123*(sc-1)+16}px`})}
 
 
 function refreshScanAssignments(){
