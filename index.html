@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>OMR Mobile v3.58 - Thông tin bài kiểm tra hoàn chỉnh</title>
+<title>OMR Mobile v3.59 - Thông tin bài kiểm tra hoàn chỉnh</title>
 <style>
 :root{--bg:#f4f7fb;--card:#fff;--ink:#172033;--muted:#6b7280;--line:#d8deea;--brand:#1769e0;--brand2:#0b4fb3;--good:#128a4b;--bad:#c0392b;--warn:#a76500;--soft:#eef5ff}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
@@ -118,7 +118,7 @@ h2{font-size:19px}.sectionTitle{margin:16px 0 8px;font-size:15px;color:var(--bra
 </style>
 </head>
 <body>
-<header><div><h1>OMR Mobile v3.58</h1><small>Tự nhận 4 marker • Tự đọc mã đề • Dữ liệu cá nhân hóa theo giáo viên</small></div>
+<header><div><h1>OMR Mobile v3.59</h1><small>Tự nhận 4 marker • Tự đọc mã đề • Dữ liệu cá nhân hóa theo giáo viên</small></div>
 <div class="accountHeader"><span class="badge">Auto OMR</span><span class="accountChip" id="headerAccountChip"><span class="accountDot" id="headerAccountDot"></span><span id="headerAccountText">Thiết bị này</span></span></div></header>
 <div class="wrap">
 <div class="tabs noPrint"><button data-tab="templates" class="active">1. Mẫu phiếu</button><button data-tab="key">2. Mã đề & đáp án</button><button data-tab="print">3. In phiếu</button><button data-tab="scan">4. Chấm bằng camera</button><button data-tab="history">5. Lịch sử</button><button data-tab="account">6. Tài khoản & cá nhân hóa</button></div>
@@ -502,11 +502,19 @@ async function activateTeacher(user){
     else currentProfile={...currentProfile,email:user.email||''};
     if(stateSnap.exists()){
       const d=stateSnap.data()||{};
-      if(Array.isArray(d.templates)&&d.templates.length)templates=d.templates;
-      if(d.assignments&&typeof d.assignments==='object')assignments=d.assignments;
-      if(Array.isArray(d.history))setScoped(LS_HIS,JSON.stringify(d.history));
-      if(d.imageMode)setScoped(LS_IMG_MODE,d.imageMode);
-      if(Number.isFinite(+d.imageRetention))setScoped(LS_IMG_RET,String(+d.imageRetention));
+      let cloudState=null;
+      // v3.59+: Firestore does not support nested arrays, so the complex OMR state
+      // is stored as one JSON string and decoded here.
+      if(typeof d.stateJson==='string'){
+        try{cloudState=JSON.parse(d.stateJson)}catch(e){console.warn('stateJson không hợp lệ',e)}
+      }
+      // Backward compatibility with any older cloud document that may exist.
+      const s=cloudState||d;
+      if(Array.isArray(s.templates)&&s.templates.length)templates=s.templates;
+      if(s.assignments&&typeof s.assignments==='object')assignments=s.assignments;
+      if(Array.isArray(s.history))setScoped(LS_HIS,JSON.stringify(s.history));
+      if(s.imageMode)setScoped(LS_IMG_MODE,s.imageMode);
+      if(Number.isFinite(+s.imageRetention))setScoped(LS_IMG_RET,String(+s.imageRetention));
     }else if(!localHad){
       templates=defaultTemplates();assignments={};setScoped(LS_HIS,'[]');
     }
@@ -518,7 +526,25 @@ async function activateTeacher(user){
   renderAccountState();applyProfileDefaults();initImageSettings();refreshSelects();fitSheet();$('#authGate').classList.remove('open');queueCloudSync();
 }
 function currentCloudState(){
-  return sanitizeFirestore({templates,assignments,history:getHistory(),imageMode:getImageMode(),imageRetention:getImageRetention(),updatedAt:new Date().toISOString(),appVersion:'3.58'});
+  const payload={
+    templates,
+    assignments,
+    history:getHistory(),
+    imageMode:getImageMode(),
+    imageRetention:getImageRetention(),
+    updatedAt:new Date().toISOString(),
+    appVersion:'3.59'
+  };
+  const stateJson=JSON.stringify(payload);
+  // Firestore rejects nested arrays. Saving the OMR payload as JSON preserves
+  // every nested answer structure while keeping the Firestore document valid.
+  return{
+    stateJson,
+    stateBytes:new Blob([stateJson]).size,
+    updatedAt:payload.updatedAt,
+    appVersion:'3.59',
+    storageFormat:'json-v1'
+  };
 }
 function queueCloudSync(){
   if(cloudLoading||!currentUser||!firebaseCtx)return;
@@ -536,8 +562,15 @@ async function syncCloudNow(showAlert=false){
     if(el)el.textContent='Đã đồng bộ Firebase lúc '+new Date().toLocaleTimeString('vi-VN');
     if(showAlert)alert('Đã đồng bộ dữ liệu giáo viên lên Firebase.');return true;
   }catch(e){
-    if(el)el.textContent='Đồng bộ thất bại: '+friendlyFirebaseError(e);
-    if(showAlert)alert('Không đồng bộ được: '+friendlyFirebaseError(e));return false;
+    let msg=friendlyFirebaseError(e);
+    if(String(e?.message||'').toLowerCase().includes('nested arrays')){
+      msg='Dữ liệu có mảng lồng nhau. Hãy dùng bản v3.59 trở lên.';
+    }
+    if(String(e?.message||'').toLowerCase().includes('maximum size')||String(e?.message||'').includes('1048576')){
+      msg='Dữ liệu đồng bộ đã quá lớn cho một tài liệu Firestore. Cần chuyển lịch sử sang kho riêng.';
+    }
+    if(el)el.textContent='Đồng bộ thất bại: '+msg;
+    if(showAlert)alert('Không đồng bộ được: '+msg);return false;
   }
 }
 async function uploadCloudImage(imageId,blob){
@@ -1003,7 +1036,7 @@ function makeAnswerKeyPackage(t){
     format:'OMR_MOBILE_ANSWER_KEY',
     schemaVersion:1,
     exportedAt:new Date().toISOString(),
-    appVersion:'3.58',
+    appVersion:'3.59',
     template:{
       name:t.name,
       schoolName:t.schoolName||'',
